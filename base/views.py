@@ -8,7 +8,13 @@ data = [
     ]
 
 def home(request):
-    return render(request, 'home.html', {'rooms': data})
+    context = {'rooms': data}
+    return render(request, 'base/home.html', context)
 
-def rooms(request):
-    return render(request, 'rooms.html')
+def rooms(request, pk):
+    room = None
+    for i in data:
+        if i['id'] == int(pk):
+            room = i
+    context = { 'room': room}
+    return render(request, 'base/room.html', context)
