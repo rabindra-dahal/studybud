@@ -115,7 +115,8 @@ def createRoom(request):
             room.user = request.user
             room.save()
             return redirect('home')
-    context = {'form': form}
+    topics = Topic.objects.all()
+    context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
 @login_required(login_url='login')
@@ -132,7 +133,8 @@ def updateRoom(request, pk):
             form.save()
             return redirect('home')
 
-    context = {'form': form}
+    topics = Topic.objects.all()
+    context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
 @login_required(login_url='login')
